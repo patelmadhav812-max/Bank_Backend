@@ -4,6 +4,8 @@ if (process.env.NODE_ENV !== "production") {
 const app = require("./src/app.js");
 const ConnectDb = require("./src/config/db.js");
 ConnectDb();
-app.listen(3000, () => {
-  console.log("app is listing");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`App is listening on port ${PORT}`);
 });
