@@ -5,16 +5,13 @@ const {
   createInitialFundsTransaction: SystemInitialFunds,
 } = require("../Controller/transaction.controller");
 const isSystemuser = require("..//middleware/isSystemUser.middleware");
-const {
-  isLogined,
-  isSystemuser,
-} = require("../middleware/isLogined.middleware");
+const { isLogined } = require("../middleware/isLogined.middleware");
 
 // create new transaction
 // post - /api/transcations/
 router.post("/", isLogined, CreateTransaction);
 
-//create initial funds transcation for system user
+//create initial funds transcation for system user\
 // post - /api/transcations/System/initial-funds
 router.post("/System/initial-funds", isSystemuser, SystemInitialFunds);
 

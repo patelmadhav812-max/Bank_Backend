@@ -1,23 +1,20 @@
 if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config(); // or import 'dotenv/config' if you're using ES6
+  require("dotenv").config();
 }
+
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    type: "OAuth2",
     user: process.env.EMAIL_USER,
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    refreshToken: process.env.REFRESH_TOKEN,
+    pass: process.env.EMAIL_APP_PASSWORD,
   },
   tls: {
     rejectUnauthorized: false,
   },
 });
 
-// Verify the connection configuration
 transporter.verify((error, success) => {
   if (error) {
     console.error("Error connecting to email server:", error);
@@ -25,7 +22,6 @@ transporter.verify((error, success) => {
     console.log("Email server is ready to send messages");
   }
 });
-
 // Function to send email
 const sendEmail = async (to, subject, text, html) => {
   try {
